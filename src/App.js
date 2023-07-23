@@ -88,7 +88,10 @@ const StyledSummary = styled.summary`
   text-align: left;
   border: 1px solid dodgerblue;
   border-radius: 8px;
-  list-style-type: none;
+  list-style: none;
+  ::-webkit-details-marker {
+    display: none;
+  }
 `;
 
 const StyledDetails = styled.details`
@@ -97,14 +100,15 @@ const StyledDetails = styled.details`
 
   display: flex;
 
-  &[open] > summary::${({ iconRight }) => (iconRight ? "after" : "before")} {
+  &[open] > ${StyledSummary}::${({ iconRight }) =>
+  iconRight ? "after" : "before"} {
     transform: rotate(180deg);
   }
 
   ${({ iconRight }) =>
     iconRight
       ? css`
-          > summary::after {
+          > ${StyledSummary}::after {
             position: absolute;
             right: calc(var(--arrow-width) / 2 + var(--spacer));
             vertical-align: middle;
@@ -114,7 +118,7 @@ const StyledDetails = styled.details`
           }
         `
       : css`
-          > summary::before {
+          > ${StyledSummary}::before {
             vertical-align: middle;
             transition: 0.2s;
             display: inline-block;
